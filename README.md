@@ -10,7 +10,7 @@
 
 - [نصب](#نصب)
 - [استفاده](#استفاده)
-- [تست](#credits)
+- [پکیج‌ها](#پکیج-ها)
 - [License](#license)
 
 # نصب
@@ -39,13 +39,17 @@ yarn install
     yarn run
 ```
 
-# Credits
+# پکیج ها
 
-List your collaborators, if any, with links to their GitHub profiles.
+در این پروژه از پکیج های زیر استفاده شده است:
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+- [Ant Design](https://ant.design/)
+- [Swiper](https://swiperjs.com/)
+- [Webpack](https://webpack.js.org/)
+- [React Device Detect](https://github.com/duskload/react-device-detect)
 
-If you followed tutorials, include links to those here as well.
+![GitHub package.json dependency version (subfolder of monorepo)](https://img.shields.io/github/package-json/dependency-version/smahmoodh/online-shop/react-device-detect)
+
 
 ## License
 
