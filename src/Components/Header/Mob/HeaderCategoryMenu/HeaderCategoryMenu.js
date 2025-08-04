@@ -7,7 +7,7 @@ const HeaderCategoryMenu = ({ onClose }) => {
   const [openKeys, setOpenKeys] = useState([]);
 
   // آدرس API جنگو رو اینجا بذار
-  const apiUrl = "http://localhost:8000/api/categories/";
+  const apiUrl = "127.0.0.1:8000/api/products/categories";
 
   const fetchData = async () => {
     try {
