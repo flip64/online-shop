@@ -10,24 +10,29 @@ const HeaderCategoryMenu = ({ onClose }) => {
   const apiUrl = "http://127.0.0.1:8000/api/products/categories/";
 
   const fetchData = async () => {
-    try {
-        const response = await fetch("http://127.0.0.1:8000/api/products/categories/");
-                const data = await response.json();
+  const fetchData = async () => {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
 
-                if (Array.isArray(data)) {
-                    setCategories(data);
-                } else if (data.data && Array.isArray(data.data)) {
-                    setCategories(data.data);
-                } else {
-                    console.error("Unexpected API response structure:", data);
-                }
-            } catch (error) {
-      
-      
-    
-      console.error("خطا در دریافت داده از API:", error);
+    let categories = [];
+
+    if (Array.isArray(data)) {
+      categories = data;
+    } else if (data.data && Array.isArray(data.data)) {
+      categories = data.data;
+    } else {
+      console.error("Unexpected API response structure:", data);
     }
-  };
+
+    // تبدیل دسته‌بندی‌ها به ساختار منوی antd
+    const formattedItems = convertTreeToMenuItems(categories);
+    setItems(formattedItems);
+    
+  } catch (error) {
+    console.error("خطا در دریافت داده از API:", error);
+  }
+};
 
   useEffect(() => {
     fetchData();
