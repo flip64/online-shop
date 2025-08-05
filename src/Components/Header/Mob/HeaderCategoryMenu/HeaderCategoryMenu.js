@@ -29,7 +29,12 @@ const HeaderCategoryMenu = ({ onClose }) => {
       console.error("⚠️ خطا در دریافت داده از API:", error);
     }
   };
-
+useEffect(() => {
+  fetch("http://127.0.0.1:8000/api/products/categories/")
+    .then(res => res.json())
+    .then(data => console.log("داده:", data))
+    .catch(err => console.error("خطا:", err));
+}, []);
   useEffect(() => {
     fetchData();
   }, []);
