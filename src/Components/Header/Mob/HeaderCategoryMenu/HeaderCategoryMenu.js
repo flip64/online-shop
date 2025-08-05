@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Menu } from "antd";
+import { Link } from "react-router-dom";
 
 const HeaderCategoryMenu = ({ onClose }) => {
   const [items, setItems] = useState([]);
@@ -20,14 +20,13 @@ const HeaderCategoryMenu = ({ onClose }) => {
       } else if (data.data && Array.isArray(data.data)) {
         categories = data.data;
       } else {
-        console.error("Unexpected API response structure:", data);
+        console.error("❌ ساختار داده‌ی API غیرمنتظره:", data);
       }
 
       const formattedItems = convertTreeToMenuItems(categories);
       setItems(formattedItems);
-
     } catch (error) {
-      console.error("خطا در دریافت داده از API:", error);
+      console.error("⚠️ خطا در دریافت داده از API:", error);
     }
   };
 
@@ -35,28 +34,38 @@ const HeaderCategoryMenu = ({ onClose }) => {
     fetchData();
   }, []);
 
-  const convertTreeToMenuItems = (tree) => {
-    return tree.map(node => ({
-      key: node.id.toString(),
-      label: <Link to={`/category/${node.slug}`}>{node.name}</Link>,
-      children: node.children ? convertTreeToMenuItems(node.children) : undefined,
-    }));
+  const convertTreeToMenuItems = (nodes) => {
+    return nodes.map((node) => {
+      const hasChildren = Array.isArray(node.children) && node.children.length > 0;
+
+      return {
+        key: node.id.toString(),
+        label: <Link to={`/category/${node.slug}`}>{node.name}</Link>,
+        children: hasChildren ? convertTreeToMenuItems(node.children) : undefined,
+      };
+    });
   };
 
   const onOpenChange = (keys) => {
     setOpenKeys(keys);
   };
 
+  const renderMenuItems = (items) => {
+    return items.map((item) =>
+      item.children ? (
+        <Menu.SubMenu key={item.key} title={item.label}>
+          {renderMenuItems(item.children)}
+        </Menu.SubMenu>
+      ) : (
+        <Menu.Item key={item.key}>{item.label}</Menu.Item>
+      )
+    );
+  };
+
   return (
     <Menu mode="inline" onOpenChange={onOpenChange} onClick={onClose} openKeys={openKeys}>
-  {items.map(item => (
-    <Menu.SubMenu key={item.key} title={item.label}>
-      {item.children?.map(sub => (
-        <Menu.Item key={sub.key}>{sub.label}</Menu.Item>
-      ))}
-    </Menu.SubMenu>
-  ))}
-</Menu>
+      {renderMenuItems(items)}
+    </Menu>
   );
 };
 
