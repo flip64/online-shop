@@ -48,13 +48,15 @@ const HeaderCategoryMenu = ({ onClose }) => {
   };
 
   return (
-    <Menu
-      mode="inline"
-      onOpenChange={onOpenChange}
-      onClick={onClose}
-      openKeys={openKeys}
-      items={items}
-    />
+    <Menu mode="inline" onOpenChange={onOpenChange} onClick={onClose} openKeys={openKeys}>
+  {items.map(item => (
+    <Menu.SubMenu key={item.key} title={item.label}>
+      {item.children?.map(sub => (
+        <Menu.Item key={sub.key}>{sub.label}</Menu.Item>
+      ))}
+    </Menu.SubMenu>
+  ))}
+</Menu>
   );
 };
 
