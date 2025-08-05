@@ -11,7 +11,6 @@ const HeaderCategoryMenu = () => {
             try {
                 const response = await fetch("http://127.0.0.1:8000/api/products/categories/");
                 const data = await response.json();
-                console.log(JSON.stringify(data, null, 2));
 
                 if (Array.isArray(data)) {
                     setCategories(data);

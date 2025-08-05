@@ -18,6 +18,7 @@ const Product = () => {
         const response = await fetch(
             `https://json.xstack.ir/api/v1${address}`
         );
+        console.log('Requesting from:', `https://json.xstack.ir/api/v1${address}`);
         const data = await response.json();
         console.log(data);
         setProduct(data);
