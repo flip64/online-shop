@@ -11,16 +11,20 @@ const HeaderCategoryMenu = ({ onClose }) => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      if (Array.isArray(data)) {
-        const menuItems = convertTreeToMenuItems(data);
-        setItems(menuItems);
-        if (menuItems.length > 0) setOpenKeys([menuItems[0].key]);
-      } else {
-        console.error("داده دریافتی از API آرایه نیست:", data);
-      }
-    } catch (error) {
+        const response = await fetch("http://127.0.0.1:8000/api/products/categories/");
+                const data = await response.json();
+
+                if (Array.isArray(data)) {
+                    setCategories(data);
+                } else if (data.data && Array.isArray(data.data)) {
+                    setCategories(data.data);
+                } else {
+                    console.error("Unexpected API response structure:", data);
+                }
+            } catch (error) {
+      
+      
+    
       console.error("خطا در دریافت داده از API:", error);
     }
   };
