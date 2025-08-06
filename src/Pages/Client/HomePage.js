@@ -4,6 +4,7 @@ import SlideShow from '../../Components/SlideShow/SlideShow';
 import ProductsSwiperList from '../../Components/ProductsSwiperList/ProductsSwiperList';
 
 const HomePage = () => {
+
     const [products, setProducts] = useState([]);
 
     const fetchData = async () => {
@@ -22,6 +23,7 @@ const HomePage = () => {
     }, []);
 
     return (
+         <p>تعداد محصولات: {products.length}</p>
         <div className='page_home'>
             <div className='main-content'>
                 <Space direction="vertical" size="large" style={{ display: 'flex' }}>
