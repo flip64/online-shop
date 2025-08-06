@@ -11,10 +11,11 @@ const HomePage = (props) => {
         const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15")
         const data = await response.json();
         console.log(data);
+        console.log("Fetched raw data:", data);
         setProducts(data.data)
     }
 
-    console.log("Fetched raw data:", data);
+    
 
     useEffect(() => {
         fetchData()
