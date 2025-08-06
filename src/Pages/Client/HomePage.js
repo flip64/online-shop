@@ -10,7 +10,7 @@ const HomePage = () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15");
             const data = await response.json();
-            console.log("Fetched raw data:", data); // ✅ این data الان آرایه محصولات هست
+
             setProducts(data); // 👈 فقط این کافی‌ست
         } catch (error) {
             console.error("خطا در دریافت محصولات:", error);
