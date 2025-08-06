@@ -1,9 +1,8 @@
 import React from "react";
 
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// import required modules
+// Import required modules
 import { Navigation } from "swiper";
 
 // Import Swiper styles
@@ -11,16 +10,14 @@ import 'swiper/swiper.min.css';
 import 'swiper/modules/navigation/navigation.min.css';
 import "./ProductsSwiperList.css";
 
-
 import ProductItem from "../ProductItem/ProductItem";
 
-const ProductsSwiperList = ({products}) => {
-
+const ProductsSwiperList = ({ products }) => {
     console.log(products);
 
     return (
         <div className="swiper-products products">
-            {products.length > 0 && (
+            {Array.isArray(products) && products.length > 0 && (
                 <Swiper
                     slidesPerView={1.5}
                     spaceBetween={5}
@@ -53,7 +50,7 @@ const ProductsSwiperList = ({products}) => {
                 </Swiper>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default ProductsSwiperList
+export default ProductsSwiperList;
