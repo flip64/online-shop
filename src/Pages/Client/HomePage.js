@@ -11,7 +11,7 @@ const HomePage = () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15");
             const data = await response.json();
-
+            console.log("Fetched data:", data);
             setProducts(data); // اطمینان داری که data آرایه است؟
         } catch (error) {
             console.error("خطا در دریافت محصولات:", error);
