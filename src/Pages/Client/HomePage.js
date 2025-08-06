@@ -14,6 +14,8 @@ const HomePage = (props) => {
         setProducts(data.data)
     }
 
+    console.log("Fetched raw data:", data);
+
     useEffect(() => {
         fetchData()
     }, [])
