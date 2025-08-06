@@ -27,11 +27,7 @@ const HomePage = (props) => {
                         style={{ display: 'flex', }}
                     >
                         <SlideShow />
-                        <ul>
-  {products.map(product => (
-    <li key={product.id}>{product.name}</li>
-  ))}
-</ul>
+                        <ProductsSwiperList products={products} />
                         <ProductsSwiperList products={products} />
                     </Space>
                 </div>
