@@ -14,54 +14,41 @@ const Product = () => {
     let address = '';
     let hasRelated = false;
 
+    const BASE_URL = "http://127.0.0.1:8000/api/products/";
+
     const fetchData = async (address) => {
-        const response = await fetch(
-            `https://json.xstack.ir/api/v1${address}`
-        );
-        console.log('Requesting from:', `https://json.xstack.ir/api/v1${address}`);
+        const response = await fetch(`${BASE_URL}/products${address}/`);
+        console.log('Requesting from:', `${BASE_URL}/products${address}/`);
         const data = await response.json();
         console.log(data);
         setProduct(data);
         fetchRelatedProducts(data.category.slug);
     }
-    const fetchRelatedProducts = async (address) => {
-        const response = await fetch(
-            `https://json.xstack.ir/api/v1/category/${address}?limit=15`
-        );
-        const data = await response.json();
-        console.log(data);
-        if (data[0].products.length)
-            hasRelated = true;
-        setRelatedProducts(data[0].products);
 
+    const fetchRelatedProducts = async (categorySlug) => {
+        const response = await fetch(`${BASE_URL}/products/?category=${categorySlug}&limit=15`);
+        const data = await response.json();
+        setRelatedProducts(data);
     }
+
     useEffect(() => {
         address = location.pathname;
         console.log(address);
         fetchData(address);
     }, []);
 
-
-
-
     if (product === undefined || relatedProducts === undefined) {
-        console.log(product === undefined && relatedProducts === undefined);
-        return <div>Loading ...</div>
+        return <div>Loading ...</div>;
     }
+
     return (
         <>
             <React.Suspense fallback={<></>}>
                 {(isBrowser) && <ProductDesktopView product={product} relatedProducts={relatedProducts} />}
                 {(isMobile) && <ProductMobileView product={product} relatedProducts={relatedProducts} />}
             </React.Suspense>
-            {/* <BrowserView>
-                <ProductDesktopView product={product} relatedProducts={relatedProducts} />
-            </BrowserView>
-            <MobileView>
-                <ProductMobileView product={product} relatedProducts={relatedProducts} />
-            </MobileView> */}
         </>
-    )
+    );
 }
 
-export default Product
+export default Product;
