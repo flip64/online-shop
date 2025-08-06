@@ -8,7 +8,7 @@ const HomePage = (props) => {
     const [products, setProducts] = useState([])
 
     const fetchData = async () => {
-        const response = await fetch("https://json.xstack.ir/api/v1/products?limit=15")
+        const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15")
         const data = await response.json();
         console.log(data);
         setProducts(data.data)
