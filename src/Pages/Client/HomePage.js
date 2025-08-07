@@ -6,7 +6,20 @@ import ProductsSwiperList from '../../Components/ProductsSwiperList/ProductsSwip
 const HomePage = () => {
 
     const [products, setProducts] = useState([]);
-
+    const [specialProducts, setSpecialProducts] = useState([]);
+  
+    const fetchSpecialProducts = async () => {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/products/specials");
+        const data = await response.json();
+        setSpecialProducts(data.results || []);  // طبق ساختار پاسخ API
+    } catch (error) {
+        console.error("خطا در دریافت محصولات ویژه:", error);
+    }
+};
+    
+    
+    
     const fetchData = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15");
@@ -20,8 +33,14 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchData();
+        fetchSpecialProducts();
     }, []);
 
+
+
+
+
+    
     return (
         <>
             <p>تعداد محصولات: {products.length}</p>
@@ -29,6 +48,7 @@ const HomePage = () => {
                 <div className='main-content'>
                     <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                         <SlideShow />
+                        <SlideShow products={specialProducts} />
                         <ProductsSwiperList products={products} />
                         <ProductsSwiperList products={products} />
                     </Space>
