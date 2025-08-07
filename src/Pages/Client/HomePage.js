@@ -42,20 +42,18 @@ const HomePage = () => {
 
     
     return (
-        <>
-            <p>تعداد محصولات: {products.length}</p>
-            <div className='page_home'>
-                <div className='main-content'>
-                    <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-                        <SlideShow />
-                        <SlideShow products={specialProducts} />
-                        <ProductsSwiperList products={products} />
-                        <ProductsSwiperList products={products} />
-                    </Space>
-                </div>
+    <>
+        <p>تعداد محصولات: {products.length}</p>
+        <div className='page_home'>
+            <div className='main-content'>
+                <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+                    <SlideShow />
+                    <ProductsSwiperList title="محصولات ویژه" products={specialProducts} />
+                    <ProductsSwiperList title="جدیدترین محصولات" products={products} />
+                </Space>
             </div>
-        </>
-    );
-};
+        </div>
+    </>
+);
 
 export default HomePage;
