@@ -56,7 +56,7 @@ const HeaderSideMenu = ({ onClose, open, cssClass, showAccountDrawer }) => {
                 <div className='drawer-item-inner header-page-list'>
                     <ul>
                         <li>
-                            <Link to="#">پیشنهاد ویژه</Link>
+                            <Link to="#">پیشنهاد فروش ویژه</Link>
                         </li>
                         <li>
                             <Link to="#">پرفروش ترین</Link>
