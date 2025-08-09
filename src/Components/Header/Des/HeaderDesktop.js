@@ -57,7 +57,7 @@ const HeaderDesktop = () => {
           <div className="header-page-list">
             <ul>
               <li>
-                <a href="#" dideo-checked="true">پیشنهاد ویژه</a>
+                <a href="#" dideo-checked="true">پیشنهاد فروش ویژه</a>
               </li>
               <li>
                 <a href="#" dideo-checked="true">پرفروش ترین</a>
