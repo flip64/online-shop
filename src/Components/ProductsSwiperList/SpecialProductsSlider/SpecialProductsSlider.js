@@ -9,7 +9,7 @@ import { Navigation } from "swiper";
 // Import Swiper styles
 import 'swiper/swiper.min.css';
 import 'swiper/modules/navigation/navigation.min.css';
-import "./ProductsSwiperList.css";
+import "SpecialProductsSlider.css";
 
 import ProductItem from "../ProductItem/ProductItem";
 
