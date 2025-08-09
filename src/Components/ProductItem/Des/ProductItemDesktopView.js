@@ -5,30 +5,39 @@ import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemDesktopView.css';
 
 const ProductItemDesktopView = ({ product }) => {
-    const price = product.price ?? 0;
-    const hasPrice = product.price !== undefined && product.price !== null;
+    const price = Math.round(product?.product?.base_price ?? 0);
+    const hasPrice = price !== undefined && price !== null;
+
+    // محاسبات رو یکبار انجام میدیم
+    const discountPercent = hasPrice ? calcDiscount(price, oldPrice, 1) : null;
+    const oldPriceFormatted = hasPrice ? seperatNumber(oldPrice) : null;
+    const priceFormatted = hasPrice ? seperatNumber(price) : null;
+
+    const slug = product?.slug;
+    const name = product?.product?.name;
+    const thumb = product?.thumb;
 
     return (
         <div className="thumb">
             <ul className="badges">
-                <li className="badge-off"> </li>
+                {hasPrice && <li className="badge-off">{discountPercent}%</li>}
             </ul>
 
             <div className="product-link">
-                <Link to={`/product/${product.slug}`} title={product.name} className='product-box-img'>
+                <Link to={`/product/${slug}`} title={name} className='product-box-img'>
                     <img
                         className="product-image"
-                        src={product.thumb}
-                        data-src={product.thumb}
-                        alt={product.slug || product.name}
+                        src={thumb}
+                        loading="lazy" // برای افزایش سرعت لود
+                        alt={slug || name}
                         width="400"
                         height="300"
                     />
                 </Link>
 
                 <div className="details">
-                    <Link className="title" to={`/product/${product.slug}`} title={product.name}>
-                        {product.name}
+                    <Link className="title" to={`/product/${slug}`} title={name}>
+                        {name}
                     </Link>
 
                     <div className="details-price">
@@ -37,12 +46,7 @@ const ProductItemDesktopView = ({ product }) => {
                                 <span className="old-price-inner">
                                     {hasPrice ? (
                                         <>
-                                            <span className="off-percent">
-                                                {calcDiscount(price, price * 1.8, 1)}%
-                                            </span>
-                                            <span className="amount-old-price">
-                                                {seperatNumber(price * 1.8)}
-                                            </span>
+                                            <span className="amount-old-price">{oldPriceFormatted}</span>
                                         </>
                                     ) : (
                                         <span className="amount-old-price">نامشخص</span>
@@ -53,7 +57,7 @@ const ProductItemDesktopView = ({ product }) => {
                             <span className="price">
                                 {hasPrice ? (
                                     <>
-                                        <span className="price-amount">{seperatNumber(price)}</span>
+                                        <span className="price-amount">{priceFormatted}</span>
                                         <span className="currency">تومان</span>
                                     </>
                                 ) : (
@@ -64,7 +68,7 @@ const ProductItemDesktopView = ({ product }) => {
 
                         <div className="rate-section">
                             <span className="reviewcount">(10)</span>
-                            <span className="star-rate"> 4.2</span>
+                            <span className="star-rate">4.2</span>
                             <i className="shape-star">
                                 <StarFilled />
                             </i>
