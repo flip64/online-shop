@@ -7,10 +7,11 @@ import './ProductItemMobileView.css';
 const ProductItemMobileView = ({ product }) => {
     const BASE_URL = "http://127.0.0.1:8000/"; // آدرس سرور تصاویر یا API
     const price = product.price ?? 0;
+    conset oldPruce = price;
     const hasPrice = product.price !== undefined && product.price !== null;
     const thumb = product?.thumb
       ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
-    console.log("%cDebug product:", "color: green; font-weight: bold;", thumb);
+    console.log("%cDebug product:", "color: green; font-weight: bold;", hasPrice);
     return (
         <div className="thumb">
             <ul className="badges">
