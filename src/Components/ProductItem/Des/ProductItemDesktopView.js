@@ -5,17 +5,25 @@ import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemDesktopView.css';
 
 const ProductItemDesktopView = ({ product }) => {
-    const price = Math.round(product?.product?.base_price ?? 0);
+   const BASE_URL = "http://127.0.0.1:8000/"; // آدرس سرور تصاویر یا API
+
+    const price = Math.round(product?.base_price ?? 0);
+    const oldPrice = price
     const hasPrice = price !== undefined && price !== null;
 
     // محاسبات رو یکبار انجام میدیم
     const discountPercent = hasPrice ? calcDiscount(price, oldPrice, 1) : null;
     const oldPriceFormatted = hasPrice ? seperatNumber(oldPrice) : null;
     const priceFormatted = hasPrice ? seperatNumber(price) : null;
-
+    
     const slug = product?.slug;
-    const name = product?.product?.name;
-    const thumb = product?.thumb;
+    const name = product?.name;
+    const thumb = product?.thumb
+     ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
+
+
+    console.log("%cDebug product:", "color: green; font-weight: bold;", thumb);
+
 
     return (
         <div className="thumb">
