@@ -12,11 +12,15 @@ import "./ProductsSwiperList.css";
 
 import ProductItem from "../ProductItem/ProductItem";
 
-const ProductsSwiperList = ({ products }) => {
-    console.log(products);
+// اینجا badgeClass و title رو هم از props می‌گیریم
+const ProductsSwiperList = ({ title, products, badgeClass }) => {
+    console.log(`Products for ${title}:`, products);
 
     return (
         <div className="swiper-products products">
+            {/* نمایش عنوان لیست */}
+            {title && <h2 className="product-list-title">{title}</h2>}
+
             {Array.isArray(products) && products.length > 0 && (
                 <Swiper
                     slidesPerView={1.5}
@@ -42,8 +46,16 @@ const ProductsSwiperList = ({ products }) => {
                 >
                     {products.map(product => (
                         <SwiperSlide key={product.id}>
-                            <div className="product-slide price_on" style={{ width: "100%", display: "inline-block" }}>
-                                <ProductItem product={product} slider={true} />
+                            <div
+                                className="product-slide price_on"
+                                style={{ width: "100%", display: "inline-block" }}
+                            >
+                                {/* پاس دادن badgeClass به ProductItem */}
+                                <ProductItem
+                                    product={product}
+                                    slider={true}
+                                    badgeClass={badgeClass}
+                                />
                             </div>
                         </SwiperSlide>
                     ))}
