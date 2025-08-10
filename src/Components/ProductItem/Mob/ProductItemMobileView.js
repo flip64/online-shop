@@ -6,22 +6,27 @@ import './ProductItemMobileView.css';
 
 const ProductItemMobileView = ({ product }) => {
     const BASE_URL = "http://127.0.0.1:8000/"; // آدرس سرور تصاویر یا API
+
+    // بررسی وجود قیمت
+    const hasPrice = product.base_price !== undefined && product.base_price !== null;
     const price = product.base_price ?? 0;
     const priceFormatted = hasPrice ? seperatNumber(price) : null;
+
+    // قیمت قدیمی
     const oldPrice = product.old_price ?? price;
     const oldPriceFormatted = hasPrice ? seperatNumber(oldPrice) : null;
+
+    // درصد تخفیف
     const discountPercent = hasPrice ? calcDiscount(price, oldPrice, 1) : null;
-    const hasPrice = product.price !== undefined && product.price !== null;
+
+    // تصویر محصول
     const thumb = product?.thumb
-      ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
-    
-   
-    const name = product?.name;
-    const slug = product?.slug;
-    
-    
-    
-    
+        ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb)
+        : BASE_URL + "media/default-thumb.jpg"; // پیش‌فرض اگر تصویر نباشد
+
+    const name = product?.name || "بدون نام";
+    const slug = product?.slug || "";
+
     return (
         <div className="thumb">
             <ul className="badges">
@@ -30,10 +35,9 @@ const ProductItemMobileView = ({ product }) => {
             </ul>
 
             <div className="product-link">
-                <Link to={`/product/${product.slug}`} title={product.name} className="image-product">
+                <Link to={`/product/${slug}`} title={name} className="image-product">
                     <img
                         src={thumb}
-                        data-src={thumb}
                         alt={slug || name}
                         width="400"
                         height="300"
@@ -60,10 +64,10 @@ const ProductItemMobileView = ({ product }) => {
                             {hasPrice ? (
                                 <>
                                     <span className="off-percent">
-                                        {calcDiscount(price, price * 1.8, 1)}%
+                                        {calcDiscount(price, oldPrice, 1)}%
                                     </span>
                                     <span className="amount-old-price">
-                                        {seperatNumber(price * 1.8)}
+                                        {oldPriceFormatted}
                                     </span>
                                 </>
                             ) : (
@@ -75,7 +79,7 @@ const ProductItemMobileView = ({ product }) => {
                         {hasPrice ? (
                             <>
                                 <span className="price-amount">
-                                    {seperatNumber(price)}
+                                    {priceFormatted}
                                 </span>
                                 <span className="currency">تومان</span>
                             </>
