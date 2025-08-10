@@ -6,12 +6,22 @@ import './ProductItemMobileView.css';
 
 const ProductItemMobileView = ({ product }) => {
     const BASE_URL = "http://127.0.0.1:8000/"; // آدرس سرور تصاویر یا API
-    const price = product.price ?? 0;
-    const oldPrice = price;
+    const price = product.base_price ?? 0;
+    const priceFormatted = hasPrice ? seperatNumber(price) : null;
+    const oldPrice = product.old_price ?? price;
+    const oldPriceFormatted = hasPrice ? seperatNumber(oldPrice) : null;
+    const discountPercent = hasPrice ? calcDiscount(price, oldPrice, 1) : null;
     const hasPrice = product.price !== undefined && product.price !== null;
     const thumb = product?.thumb
       ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
-    console.log("%cDebug product:", "color: green; font-weight: bold;", hasPrice);
+    
+   
+    const name = product?.name;
+    const slug = product?.slug;
+    
+    
+    
+    
     return (
         <div className="thumb">
             <ul className="badges">
@@ -24,14 +34,14 @@ const ProductItemMobileView = ({ product }) => {
                     <img
                         src={thumb}
                         data-src={thumb}
-                        alt={product.slug || name}
+                        alt={slug || name}
                         width="400"
                         height="300"
                     />
                 </Link>
 
-                <Link className="h2" to={`/product/${product.slug}`} title={product.name}>
-                    {product.name}
+                <Link className="h2" to={`/product/${slug}`} title={name}>
+                    {name}
                 </Link>
             </div>
 
