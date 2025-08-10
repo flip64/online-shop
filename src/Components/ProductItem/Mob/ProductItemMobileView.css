@@ -24,7 +24,7 @@
     background-size: contain;
 }
 .thumb .badges li.badge-special:after {
-    content: "پیشنهاد فروش ویژه";
+    content: "";
     font-size: 12px;
     font-weight: normal;
     line-height: 12px;
