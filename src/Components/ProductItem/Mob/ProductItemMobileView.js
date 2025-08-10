@@ -4,7 +4,7 @@ import { StarFilled } from '@ant-design/icons';
 import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemMobileView.css';
 
-const ProductItemMobileView = ({ product }) => {
+const ProductItemMobileView = ({ product, badgeClass }) => {
     const BASE_URL = "http://127.0.0.1:8000/"; // آدرس سرور تصاویر یا API
 
     // بررسی وجود قیمت
@@ -30,7 +30,8 @@ const ProductItemMobileView = ({ product }) => {
     return (
         <div className="thumb">
             <ul className="badges">
-                <li className="badge-special"></li>
+                {/* کلاس badgeClass برای متن داینامیک هر لیست */}
+                <li className={`badge-special ${badgeClass || ''}`}></li>
                 <li className="badge-off"></li>
             </ul>
 
@@ -64,7 +65,7 @@ const ProductItemMobileView = ({ product }) => {
                             {hasPrice ? (
                                 <>
                                     <span className="off-percent">
-                                        {calcDiscount(price, oldPrice, 1)}%
+                                        {discountPercent}%
                                     </span>
                                     <span className="amount-old-price">
                                         {oldPriceFormatted}
