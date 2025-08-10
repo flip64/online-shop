@@ -21,9 +21,9 @@ const ProductItemMobileView = ({ product }) => {
             <div className="product-link">
                 <Link to={`/product/${product.slug}`} title={product.name} className="image-product">
                     <img
-                        src={product.thumb}
-                        data-src={product.thumb}
-                        alt={product.slug || product.name}
+                        src={thumb}
+                        data-src={thumb}
+                        alt={product.slug || name}
                         width="400"
                         height="300"
                     />
