@@ -7,9 +7,10 @@ const HomePage = () => {
 
     const [products, setProducts] = useState([]);
     const [specialProducts, setSpecialProducts] = useState([]);
+    const [bestSellerProducts, setBestSellerProducts] = useState([]);
+    const [discountedProducts, setDiscountedProducts] = useState([]);
 
-
-
+    
     const fetchSpecialProducts = async () => {
     try {
         const response = await fetch("http://127.0.0.1:8000/api/products/specialproduct/");
@@ -46,8 +47,27 @@ const HomePage = () => {
                 <div className='main-content'>
                     <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                         <SlideShow />
-                        <ProductsSwiperList title="محصولات ویژه" products={specialProducts} />
-                        <ProductsSwiperList title="جدیدترین محصولات" products={products} />
+                        <ProductsSwiperList
+                          title="فروش ویژه"
+                          products={specialProducts}
+                          badgeClass="badge-special-sale"
+                            />
+                       <ProductsSwiperList
+                        title="جدیدترین‌ها"
+                        products={products}
+                        badgeClass="badge-special-new"
+                           />
+                       <ProductsSwiperList
+                        title="پرفروش‌ترین‌ها"
+                        products={bestSellerProducts}
+                        badgeClass="badge-special-bestseller"
+                       />
+                      <ProductsSwiperList
+                        title="تخفیف‌دار"
+                        products={discountedProducts}
+                        badgeClass="badge-special-discount"
+                      />
+    
                     </Space>
                 </div>
             </div>
