@@ -10,7 +10,7 @@ const ProductItemMobileView = ({ product }) => {
     const hasPrice = product.price !== undefined && product.price !== null;
     const thumb = product?.thumb
       ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
-
+    console.log("%cDebug product:", "color: green; font-weight: bold;", thumb);
     return (
         <div className="thumb">
             <ul className="badges">
