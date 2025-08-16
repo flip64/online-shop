@@ -31,7 +31,7 @@ const HomePage = () => {
         try {
             // قبل از فراخوانی API، آدرس را لاگ کنید
             const response = await fetch("http:/bazbia.ir/api/products/products?limit=15");
-            console.log
+            
             
             const data = await response.json();
             setProducts(data || []);
