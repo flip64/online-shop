@@ -13,10 +13,11 @@ const HomePage = () => {
     
     const fetchSpecialProducts = async () => {
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/products/specialproduct/");
+        const response = await fetch("http:/bazbia.ir/api/products/specialproduct/");
         
         // نسخه کلون برای لاگ
         const debugData = await response.clone().json();
+        console.log(response);
         console.log("Raw response data:", debugData);
 
         const data = await response.json();
@@ -28,7 +29,10 @@ const HomePage = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/products/products?limit=15");
+            // قبل از فراخوانی API، آدرس را لاگ کنید
+            const response = await fetch("http:/bazbia.ir/api/products/products?limit=15");
+            console.log
+            
             const data = await response.json();
             setProducts(data || []);
         } catch (error) {
