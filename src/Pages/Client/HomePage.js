@@ -17,7 +17,7 @@ const HomePage = () => {
         
         // نسخه کلون برای لاگ
         const debugData = await response.clone().json();
-        console.log(response);
+        console.log(response.status);
         console.log("Raw response data:", debugData);
 
         const data = await response.json();
