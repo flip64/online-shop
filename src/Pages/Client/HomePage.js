@@ -14,7 +14,7 @@ const HomePage = () => {
     const fetchSpecialProducts = async () => {
     try {
         const response = await fetch("/api/products/specialproduct/");
-        console.log(response.status)
+        console.log(response)
         // نسخه کلون برای لاگ
         const debugData = await response.clone().json();
         console.log(response.status);
