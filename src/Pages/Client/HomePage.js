@@ -13,7 +13,7 @@ const HomePage = () => {
     
     const fetchSpecialProducts = async () => {
     try {
-        const response = await fetch("/api/products/specialproduct/");
+        const response = await fetch("http://backend.bazbia.ir/api/products/specialproduct/");
         console.log(response)
         // نسخه کلون برای لاگ
         const debugData = await response.clone().json();
