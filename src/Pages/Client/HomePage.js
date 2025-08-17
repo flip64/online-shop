@@ -13,7 +13,7 @@ const HomePage = () => {
     
     const fetchSpecialProducts = async () => {
     try {
-        const response = await fetch("http://backend.bazbia.ir/api/products/specialproduct/");
+        const response = await fetch("https://backend.bazbia.ir/api/products/specialproduct/");
         console.log(response)
         // نسخه کلون برای لاگ
         const debugData = await response.clone().json();
@@ -30,14 +30,7 @@ const HomePage = () => {
     const fetchData = async () => {
         try {
             // قبل از فراخوانی API، آدرس را لاگ کنید
-<<<<<<< HEAD
-            const response = await fetch("/api/products/products?limit=15");
-            
-=======
-            const response = await fetch("http://bazbia.ir/api/products/products?limit=15");
-            console.log(response)
->>>>>>> 67572c4 (edit home)
-            
+            const response = await fetch("https://backend.bazbia.ir/api/products/products?limit=15");            
             const data = await response.json();
             setProducts(data || []);
         } catch (error) {

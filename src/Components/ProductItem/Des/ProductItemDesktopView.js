@@ -5,7 +5,7 @@ import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemDesktopView.css';
 
 const ProductItemDesktopView = ({ product }) => {
-   const BASE_URL = "https://bazbia.ir/"; // آدرس سرور تصاویر یا API
+   const BASE_URL = "https://backend.bazbia.ir/"; // آدرس سرور تصاویر یا API
 
     const price = Math.round(product?.base_price ?? 0);
     const oldPrice = price
