@@ -44,14 +44,14 @@ const FooterComponent = () => {
                                     <span>
                                         <img src={deliveryFastImg} title="تحویل اکسپرس" />
                                         <span className="title">تحویل اکسپرس</span>
-                                        <span className="subtitle">24 ساعته در اصفهان</span>
+                                        <span className="subtitle">24 ساعته در شهرقدس</span>
                                     </span>
                                 </li>
                                 <li>
                                     <span>
                                         <img src={paymentImg} title="پرداخت در محل" />
                                         <span className="title">پرداخت در محل</span>
-                                        <span className="subtitle">فقط در اصفهان</span>
+                                        <span className="subtitle">فقط در شهرقدس</span>
                                     </span>
                                 </li>
                             </ul>
@@ -115,9 +115,9 @@ const FooterComponent = () => {
                             <div className="working-days">
                                 <span>پاسخگوی شما هستیم : </span>
                                 <span>شنبه تا چهارشنبه </span>
-                                <span className="green-text">۹-۱۷ </span>
+                                <span className="green-text">8-23 </span>
                                 <span>. پنج شنبه </span>
-                                <span className="green-text">۹-۱۴</span>
+                                <span className="green-text">8-17</span>
                             </div>
                             <Row className="row contact-box">
                                 <Col
@@ -130,13 +130,13 @@ const FooterComponent = () => {
                                         <span className="hedaer_tel">
                                             <a href="tel:02112345678" dideo-checked="true">
                                                 <PhoneOutlined style={{ color: '#0089ff' }} rotate={90} />
-                                                021-12345678
+                                                0922474970
                                             </a>
                                         </span>
                                         <span className="header_mail">
                                             <a href="#" dideo-checked="true">
                                                 <MailOutlined style={{ color: '#0089ff' }}/>
-                                                info@mail.com
+                                                jr64.naderloo@gmail.com
                                             </a>
                                         </span>
                                     </div>
@@ -216,15 +216,9 @@ const FooterComponent = () => {
                 <div className="container-fluid">
                     <div className="footer-text">
                         فروشگاه اینترنتی تخصصی React
-                        زمان یکی از با ارزش ترین سرمایه های انسانی است که باید از آن به بهترین نحو ممکن استفاده شود. اهمیت زمان آنقدر برای بشر شناخته شده بود که همواره سعی داشته و دارد، تا برای رسیدن به اهداف خود کوتاه ترین مسیر را انتخاب کند. مسیری که او را زودتر به هدف مورد نظر خود برساند. در سال های اخیر با فراگیر شدن گجت های هوشمند مثل موبایل، تبلت و یا ابزارهای الکترونیکی دیگر مثل لپ تاپ، دوربین، کنسول بازی و... سبب شد شاخه ای جدید در بازار شکل بگیرد که هدف از آن رفع نیازهای React از گروه محصولات باشد		    </div>
+                        زمان یکی از با ارزش ترین سرمایه های انسانی است که باید از آن به بهترین نحو ممکن استفاده شود. اهمیت زمان آنقدر برای بشر شناخته شده بود که همواره سعی داشته و دارد، تا برای رسیدن به اهداف خود کوتاه ترین مسیر را انتخاب کند. مسیری که او را زودتر به هدف مورد نظر خود برساند. در سال های اخیر با فراگیر شدن گجت های هوشمند مثل موبایل، تبلت و یا ابزارهای الکترونیکی دیگر مثل لپ تاپ، دوربین، کنسول بازی و... سبب شد شاخه ای جدید در بازار شکل بگیرد که هدف از آن رفع نیازهای bazbia از گروه محصولات باشد		    </div>
                     <div className="footer-license">
                         استفاده از مطالب   <a href="#" title="تست">فروشگاه اینترنتی React</a>  فقط برای مقاصد غیر تجاری و با ذکر منبع بلامانع است. کليه حقوق اين سايت محفوظ می‌باشد
-
-                        <div className="licence-area">
-                            <span id="shopfa_license">
-                                فروشگاه ساخته شده با <a target="_blank" title="react" href="#">React</a>
-                            </span>
-                        </div>
 
                     </div>
                 </div>
