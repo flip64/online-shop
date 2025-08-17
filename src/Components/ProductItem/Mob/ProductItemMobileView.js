@@ -5,8 +5,9 @@ import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemMobileView.css';
 
 const ProductItemMobileView = ({ product, badgeClass }) => {
-    const BASE_URL = "http://bazbia.ir/"; // آدرس سرور تصاویر یا API
 
+    const BASE_URL = "http://bazbia.ir/"; // آدرس سرور تصاویر یا API
+ 
     // بررسی وجود قیمت
     const hasPrice = product.base_price !== undefined && product.base_price !== null;
     const price = product.base_price ?? 0;
