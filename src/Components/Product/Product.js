@@ -17,8 +17,8 @@ const Product = () => {
     const BASE_URL = "http://127.0.0.1:8000/api/products/";
 
     const fetchData = async (address) => {
-        const response = await fetch(`${BASE_URL}/products${address}/`);
-        console.log('Requesting from:', `${BASE_URL}/products${address}/`);
+        const response = await fetch(`${BASE_URL}products/${address}/`);
+        console.log('Requesting from:', `${BASE_URL}products/${address}/`);
         const data = await response.json();
         console.log(data);
         setProduct(data);
