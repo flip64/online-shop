@@ -12,7 +12,7 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const BASE_URL = "https://backend.bazbia.ir/api/products/products/";
+  const BASE_URL = "https://backend.bazbia.ir/api/products/";
 
   const fetchProduct = async (slug) => {
     try {
@@ -20,7 +20,6 @@ const Product = () => {
       setError(null);
 
       const response = await fetch(`${BASE_URL}${slug}/`);
-      console.log(`${BASE_URL}${slug}/`)
       if (!response.ok) throw new Error(`Failed to fetch product: ${response.status}`);
       const data = await response.json();
       setProduct(data);
@@ -33,6 +32,7 @@ const Product = () => {
     } catch (err) {
       console.error(err);
       setError(err.message);
+      setProduct(null);
     } finally {
       setLoading(false);
     }
