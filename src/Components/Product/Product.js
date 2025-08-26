@@ -20,7 +20,7 @@ const Product = () => {
       setError(null);
 
       const response = await fetch(`${BASE_URL}${slug}/`);
-      consol.log(`${BASE_URL}${slug}/`)
+      console.log(`${BASE_URL}${slug}/`)
       if (!response.ok) throw new Error(`Failed to fetch product: ${response.status}`);
       const data = await response.json();
       setProduct(data);
