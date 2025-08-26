@@ -5,7 +5,7 @@ import { seperatNumber, calcDiscount } from '../../../Utils/utilities';
 import './ProductItemDesktopView.css';
 
 const ProductItemDesktopView = ({ product }) => {
-   const BASE_URL = "https://backend.bazbia.ir/"; // آدرس سرور تصاویر یا API
+   const BASE_URL = "http://127.0.0.1:8000"; // آدرس سرور تصاویر یا API
 
     const price = Math.round(product?.base_price ?? 0);
     const oldPrice = price
@@ -18,11 +18,11 @@ const ProductItemDesktopView = ({ product }) => {
     
     const slug = product?.slug;
     const name = product?.name;
-    const thumb = product?.thumb
-     ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
+    const thumb = product?.thumb ? (product.thumb.startsWith("http") ? product.thumb : BASE_URL + product.thumb) : null;
 
 
     console.log("%cDebug product:", "color: green; font-weight: bold;", thumb);
+    console.log("Product thumb (desktop):", product?.thumb);
 
 
     return (
