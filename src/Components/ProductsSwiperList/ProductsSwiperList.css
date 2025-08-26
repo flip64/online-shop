@@ -27,7 +27,7 @@
 .swiper-products .swiper-button-next,
 .swiper-products .swiper-button-prev {
     width: 49px;
-    height: 90px;
+    height: 60px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
