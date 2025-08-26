@@ -12,7 +12,7 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const BASE_URL = "http://backend.bazbia.ir/api/products/";
+  const BASE_URL = "https://backend.bazbia.ir/api/products/";
 
   const fetchProduct = async (slug) => {
     try {
