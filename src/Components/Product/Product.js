@@ -1,54 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import { isBrowser, isMobile } from 'react-device-detect';
-import { useLocation } from 'react-router-dom';
-
-import './Product.css';
+import { useParams } from 'react-router-dom';
 
 const ProductDesktopView = React.lazy(() => import('./Des/ProductDesktopView'));
 const ProductMobileView = React.lazy(() => import('./Mob/ProductMobileView'));
 
 const Product = () => {
-    const location = useLocation();
-    const [product, setProduct] = useState();
-    const [relatedProducts, setRelatedProducts] = useState();
-    let address = '';
-    let hasRelated = false;
+  const { slug } = useParams();
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const BASE_URL = "http://127.0.0.1:8000/api/products/";
+  const BASE_URL = "http://127.0.0.1:8000/api/products/";
 
-    const fetchData = async (address) => {
-        const response = await fetch(`${BASE_URL}products/${address}/`);
-        console.log('Requesting from:', `${BASE_URL}products/${address}/`);
-        const data = await response.json();
-        console.log(data);
-        setProduct(data);
+  const fetchProduct = async (slug) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch(`${BASE_URL}${slug}/`);
+      if (!response.ok) throw new Error(`Failed to fetch product: ${response.status}`);
+      const data = await response.json();
+      setProduct(data);
+
+      if (data.category?.slug) {
         fetchRelatedProducts(data.category.slug);
+      } else {
+        setRelatedProducts([]);
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const fetchRelatedProducts = async (categorySlug) => {
-        const response = await fetch(`${BASE_URL}/products/?category=${categorySlug}&limit=15`);
-        const data = await response.json();
-        setRelatedProducts(data);
+  const fetchRelatedProducts = async (categorySlug) => {
+    try {
+      const response = await fetch(`${BASE_URL}?category=${categorySlug}&limit=15`);
+      if (!response.ok) throw new Error(`Failed to fetch related products: ${response.status}`);
+      const data = await response.json();
+      setRelatedProducts(data);
+    } catch (err) {
+      console.error(err);
+      setRelatedProducts([]);
     }
+  };
 
-    useEffect(() => {
-        address = location.pathname;
-        console.log(address);
-        fetchData(address);
-    }, []);
+  useEffect(() => {
+    if (slug) fetchProduct(slug);
+  }, [slug]);
 
-    if (product === undefined || relatedProducts === undefined) {
-        return <div>Loading ...</div>;
-    }
+  if (loading) return <div>Loading product...</div>;
+  if (error) return <div style={{ color: 'red' }}>Error: {error}</div>;
+  if (!product) return <div>No product found.</div>;
 
-    return (
-        <>
-            <React.Suspense fallback={<></>}>
-                {(isBrowser) && <ProductDesktopView product={product} relatedProducts={relatedProducts} />}
-                {(isMobile) && <ProductMobileView product={product} relatedProducts={relatedProducts} />}
-            </React.Suspense>
-        </>
-    );
-}
+  return (
+    <React.Suspense fallback={<div>Loading view...</div>}>
+      {isBrowser && <ProductDesktopView product={product} relatedProducts={relatedProducts} />}
+      {isMobile && <ProductMobileView product={product} relatedProducts={relatedProducts} />}
+    </React.Suspense>
+  );
+};
 
 export default Product;
