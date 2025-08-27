@@ -38,19 +38,24 @@ const Product = () => {
     }
   };
 
-  const fetchRelatedProducts = async (categBASBASE_URLE_URLorySlug00) => {
-    try {
-     const url=`${BASE_URL}products/categories/${slug}&limit=15`
-      console.log(url)
-      const response = await fetch(`${BASE_URL}products/categories/${slug}&limit=15`);
-      if (!response.ok) throw new Error(`Failed to fetch related products: ${response.status}`);
-      const data = await response.json();
-      setRelatedProducts(data);
-    } catch (err) {
-      console.error(err);
-      setRelatedProducts([]);
-    }
-  };
+
+  const fetchRelatedProducts = async (categorySlug) => {
+   try {
+     const url = `${BASE_URL}products/categories/${categorySlug}/?limit=15`;
+     console.log("Fetching related products from:", url);
+
+     const response = await fetch(url);
+     if (!response.ok) throw new Error(`Failed to fetch related products: ${response.status}`);
+    
+     const data = await response.json();
+     setRelatedProducts(data);
+   } catch (err) {
+    console.error(err);
+    setRelatedProducts([]);
+   }
+ };
+
+  
 
   useEffect(() => {
     if (slug) fetchProduct(slug);
