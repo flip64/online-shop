@@ -6,7 +6,7 @@ const ProductDesktopView = React.lazy(() => import('./Des/ProductDesktopView'));
 const ProductMobileView = React.lazy(() => import('./Mob/ProductMobileView'));
 
 const Product = () => {
-  const { slug } = useParams();
+  const {slug} = useParams();
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
