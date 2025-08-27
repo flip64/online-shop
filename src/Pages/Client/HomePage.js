@@ -4,7 +4,7 @@ import SlideShow from '../../Components/SlideShow/SlideShow';
 import ProductsSwiperList from '../../Components/ProductsSwiperList/ProductsSwiperList';
 
 const HomePage = () => {
-    const BASE_URL = "http://127.0.0.1:8000";
+    const BASE_URL = "https://backend.bazbia.ir";
     const [products, setProducts] = useState([]);
     const [specialProducts, setSpecialProducts] = useState([]);
     const [bestSellerProducts, setBestSellerProducts] = useState([]);
@@ -32,7 +32,7 @@ const HomePage = () => {
     const fetchData = async () => {
         try {
             // قبل از فراخوانی API، آدرس را لاگ کنید
-            const response = await fetch("http://127.0.0.1:8000/api/products/new_products?limit=15");            
+            const response = await fetch(`${BASE_URL}/api/products/new_products?limit=15`);            
             const data = await response.json();
             setProducts(data || []);
         } catch (error) {

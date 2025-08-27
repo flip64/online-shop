@@ -6,11 +6,12 @@ const HeaderCategoryMenu = ({ onClose }) => {
   const [items, setItems] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
 
-  const apiUrl = "http://127.0.0.1:8000/api/products/categories/";
-
+  const BASE_URL = "https://backend.bazbia.ir/";
+  console.log(`${BASE_URL}api/products/categories`)
   const fetchData = async () => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(`${BASE_URL}api/products/categories`);
+      console.log(`${BASE_URL}api/products/categories`)
       const data = await response.json();
 
       let categories = [];
@@ -20,17 +21,19 @@ const HeaderCategoryMenu = ({ onClose }) => {
       } else if (data.data && Array.isArray(data.data)) {
         categories = data.data;
       } else {
-        console.error("❌ ساختار داده‌ی API غیرمنتظره:", data);
+        console.error(" ساختار داده‌ی API غیرمنتظره:", data);
       }
 
       const formattedItems = convertTreeToMenuItems(categories);
       setItems(formattedItems);
-    } catch (error) {
-      console.error("⚠️ خطا در دریافت داده از API:", error);
+    } 
+    catch (error) {
+      console.error(" خطا در دریافت داده از API:", error);
     }
   };
+  
 useEffect(() => {
-  fetch("http://127.0.0.1:8000/api/products/categories/")
+  fetch(`${BASE_URL}api/products/categories/`)
     .then(res => res.json())
     .then(data => console.log("داده:", data))
     .catch(err => console.error("خطا:", err));
