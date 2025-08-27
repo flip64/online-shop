@@ -40,6 +40,8 @@ const Product = () => {
 
   const fetchRelatedProducts = async (categBASBASE_URLE_URLorySlug00) => {
     try {
+      url=`${BASE_URL}products/categories/${slug}&limit=15`
+      console.log(url)
       const response = await fetch(`${BASE_URL}products/categories/${slug}&limit=15`);
       if (!response.ok) throw new Error(`Failed to fetch related products: ${response.status}`);
       const data = await response.json();
