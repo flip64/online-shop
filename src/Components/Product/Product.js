@@ -12,14 +12,14 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const BASE_URL = "https://backend.bazbia.ir/";
+  const BASE_URL = "https://backend.bazbia.ir/api";
 
   const fetchProduct = async (slug) => {
     try {
       setLoading(true); 
       setError(null);
 
-      const response = await fetch(`${BASE_URL}api/products/categories/${slug}/`);
+      const response = await fetch(`${BASE_URL}/products/${slug}/`);
       if (!response.ok) throw new Error(`Failed to fetch product: ${response.status}`);
       const data = await response.json();
       setProduct(data);
@@ -40,7 +40,7 @@ const Product = () => {
 
   const fetchRelatedProducts = async (categBASBASE_URLE_URLorySlug00) => {
     try {
-      const response = await fetch(`${BASE_URL }products/category=${slug}&limit=15`);
+      const response = await fetch(`${BASE_URL}products/categories${slug}&limit=15`);
       if (!response.ok) throw new Error(`Failed to fetch related products: ${response.status}`);
       const data = await response.json();
       setRelatedProducts(data);
