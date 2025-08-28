@@ -1,79 +1,69 @@
-import React, { useState } from "react";
-import { Image, InputNumber, Button, Rate } from "antd";
-import { HeartOutlined, ShareAltOutlined, ShoppingOutlined } from "@ant-design/icons";
-import ProductsSwiperList from "../ProductsSwiperList/ProductsSwiperList";
-import "./ProductDetail.css";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const ProductDetail = ({ product, relatedProducts }) => {
-  const [mainImage, setMainImage] = useState(product.images?.[0]?.image || "");
-  const [quantity, setQuantity] = useState(1);
+export default function ProductDetail() {
+  const { slug } = useParams(); // فرض می‌کنیم URL مثل /products/:slug هست
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!product) return <div>Loading...</div>;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`https://backend.bazbia.ir/api/products/${slug}/`);
+        if (!res.ok) throw new Error("خطا در دریافت محصول");
+        const data = await res.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const price = parseFloat(product.base_price) || 0;
-  const newPrice = price * quantity;
+    fetchProduct();
+  }, [slug]);
+
+  if (loading) return <p>در حال بارگذاری محصول...</p>;
+  if (error) return <p>خطا: {error}</p>;
+  if (!product) return <p>محصولی یافت نشد</p>;
 
   return (
-    <div className="product-detail-container">
-      {/* بالای صفحه: گالری و اطلاعات */}
-      <div className="product-main">
-        <div className="product-images">
-          <Image.PreviewGroup>
-            <div className="main-image">
-              <img src={mainImage} alt={product.name} />
-            </div>
-            <div className="thumbnail-images">
-              {product.images?.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img.image}
-                  alt={product.name}
-                  onClick={() => setMainImage(img.image)}
-                />
-              ))}
-            </div>
-          </Image.PreviewGroup>
-        </div>
+    <div className="product-detail">
+      <h1>{product.name}</h1>
+      <p>قیمت: {product.base_price} تومان</p>
+      <p>دسته‌بندی: {product.category?.name || "نامشخص"}</p>
 
-        <div className="product-info">
-          <h1>{product.name}</h1>
-          <Rate allowHalf defaultValue={product.rating || 0} />
-
-          <div className="price-section">
-            <span className="new-price">{newPrice.toLocaleString()} تومان</span>
-            {price > 0 && (
-              <>
-                <span className="old-price">{(price * 1.2).toLocaleString()} تومان</span>
-                <span className="discount">{Math.round(((price * 1.2 - price) / (price * 1.2)) * 100)}%</span>
-              </>
-            )}
-          </div>
-
-          <div className="product-actions">
-            <InputNumber min={1} max={100} value={quantity} onChange={val => setQuantity(val)} />
-            <Button type="primary" icon={<ShoppingOutlined />}>افزودن به سبد</Button>
-            <Button shape="circle" icon={<HeartOutlined />} />
-            <Button shape="circle" icon={<ShareAltOutlined />} />
-          </div>
-
-          <div className="product-description">
-            <h3>توضیحات محصول</h3>
-            <p>{product.description || "توضیحی برای این محصول ثبت نشده است."}</p>
-          </div>
-        </div>
+      <div className="product-images">
+        {product.images?.length > 0 ? (
+          product.images.map((img, index) => (
+            <img
+              key={index}
+              src={img.image}
+              alt={img.alt_text || product.name}
+              style={{ width: "200px", margin: "10px" }}
+            />
+          ))
+        ) : (
+          <p>تصویری موجود نیست</p>
+        )}
       </div>
 
-      {/* محصولات مرتبط */}
-      <div className="related-products">
-        <h3>محصولات مرتبط</h3>
-        {relatedProducts?.length > 0 ? (
-          <ProductsSwiperList products={relatedProducts} />
+      <div className="product-specs">
+        <h3>مشخصات:</h3>
+        {product.specifications?.length > 0 ? (
+          <ul>
+            {product.specifications.map((spec, idx) => (
+              <li key={idx}>
+                {spec.name}: {spec.value}
+              </li>
+            ))}
+          </ul>
         ) : (
-          <p>محصول مرتبطی وجود ندارد.</p>
+          <p>مشخصات موجود نیست</p>
         )}
       </div>
     </div>
   );
-};
-
-export default ProductDetail;
+}

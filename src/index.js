@@ -11,7 +11,7 @@ import Profile from './Pages/Client/Profile';
 import Cart from './Pages/Client/Cart';
 // import ProductCategory from './Components/ProductCategory/ProductCategory';
 import ProductCategory from './Components/ProductCategoryWithSortFilter/ProductCategory';
-import Product from './Components/Product/Product';
+import Product from './Pages/Client/ProductDetails/ProductDetails';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
