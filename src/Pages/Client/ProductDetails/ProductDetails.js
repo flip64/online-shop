@@ -14,6 +14,7 @@ export default function ProductDetail() {
         const res = await fetch(`https://backend.bazbia.ir/api/products/${slug}/`);
         if (!res.ok) throw new Error("خطا در دریافت محصول");
         const data = await res.json();
+        consle.log(data);
         setProduct(data);
       } catch (err) {
         setError(err.message);
